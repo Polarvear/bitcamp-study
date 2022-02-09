@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>수배범 등록 화면입니다.</title>
+</head>
+<form>
+    *이름: <input id="x-name" type="text" readonly>
+    나이: <input id="x-age" type="text">
+    성별: <input id="x-gender" type="text">
+    *현상금: <input id="x-bounty" type="text">
+    별표(*) 항목은 필수 입력입니다.<br>
+    <button id="x-update-btn" type="button">변경</button>
+    <button id="x-delete-btn" type="button">삭제</button>
+    <button id="x-cancel-btn" type="button">취소</button>
+</form>
+<body>
+<script>
+    const arr = location.href.split('?')
+    console.log(arr)
+
+    if (arr.length == 1) {
+        alert('요청형식이 올바르지 않습니다.')
+        throw 'URL 형식 오류!'
+    }
+
+    fetch(`/trylist/update?name=${xName.value}&age=${xAge.value}&gender=${xGender.value}&bounty=${xBounty.value}`)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(text) {
+            console.log(text);
+            location.href = "index.html";
+        });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>연락처</title>
+</head>
+<style>
+    #feed-title {
+        text-align: center;
+    }
+</style>
+<body>
+<h1>도서 리뷰 쓰기</h1>
+<form>
+    *제목 : <input id="x-title" type="text"><br>&nbsp;
+    저자 : <input id="x-author" type="text"><br>&nbsp;
+    출판사 : <input id="x-press" type="text"><br>&nbsp;
+    총 페이지 : <input id="x-pages" type="text"><br>&nbsp;
+    가격 : <input id="x-price" type="text"><br>&nbsp;
+    읽은 날짜 : <input id="x-readDate" type="date"><br>&nbsp;
+    느낀점 : <br><textarea id="x-feed" cols="60" rows="10"></textarea><br>
+    *항목은 필수 입력항목입니다<br>
+    <button id="x-add-btn" type="button">등록</button>
+    <button id="x-cancle-btn" type="button"><a href="index.html">취소</a></button>
+</form>
+</body>
+<script>
+    const xTitle = document.querySelector('#x-title')
+    const xAuthor = document.querySelector('#x-author')
+    const xPress = document.querySelector('#x-press')
+    const xPages = document.querySelector('#x-pages')
+    const xPrice = document.querySelector('#x-price')
+    const xReadDate = document.querySelector('#x-readDate')
+    const xFeed = document.querySelector('#x-feed')
+
+    document.querySelector('#x-add-btn').addEventListener('click', (e) => {
+        if (xReadDate === null) {
+            xReadDate
+        }
+        fetch(`/book/add?title=${xTitle.value}&author=${xAuthor.value}&press=${xPress.value}&pages=${xPages.value}&price=${xPrice.value}&readDate=${xReadDate.value}&feed=${xFeed.value}`)
+          .then((response) => {
+              return response.text()
+          })
+          .then(data => {
+              console.log(data)
+              location.href = 'index.html'
+          })
+    },false)
+</script>
+</html>

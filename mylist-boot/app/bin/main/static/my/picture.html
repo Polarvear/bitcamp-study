@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>현상수배범 사진</title>
+  <h1>도적 사진</h1>
+</head>
+<div>
+  <img src="img/01.jfif">
+
+
+</div>
+
+<body>
+<script>
+  const divTag = document.querySelector('#x-div')
+  const img = document.createElement('img')
+  loadData('http://localhost:8080/mylist-boot/app/src/main/resources/static/my/all.json')
+  function loadData(serverInfo) {
+    console.log("loadData: " + serverInfo)
+    fetch(serverInfo)
+            .then(response => response.json())  // 데이터 추출
+            .then(data => {
+              console.log(data)
+              divTag.appendChild(img)
+            })
+  }
+
+
+</script>
+
+</body>
+</html>

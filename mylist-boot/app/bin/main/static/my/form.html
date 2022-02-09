@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>연락처</title>
+</head>
+<body>
+<h1>새로운 현상수배범 등록</h1>
+<form>
+    *이름:<input id="x-name" type="text">
+    나이:<input id="x-age" type="text">
+    성별:<input id="x-gender" type="text">
+    *현상금:<input id="x-bounty" type="text">
+    *항목은 필수 입력항목입니다<br>
+    <button id="x-add-btn" type="button">추가 완료</button>
+    <button id="x-cancle-btn" type="button">취소</button>
+</form>
+
+
+<script type="text/javascript">
+    const xName = document.querySelector("#x-name")
+    const xAge = document.querySelector("#x-age")
+    const xGender = document.querySelector("#x-gender")
+    const xBounty = document.querySelector("#x-bounty")
+
+    const addBtn = document.querySelector('#x-add-btn')
+    addBtn.addEventListener('click', () => {
+        if (xName.value == "" || xBounty.value == "") {
+            window.alert("필수 입력사항을 작성해주세요.")
+            return;
+        }
+        fetch(`/my/add?name=${xName.value}&age=${xAge.value}&gender=${xGender.value}&bounty=${xBounty.value}`)
+            .then(function(response) {
+                return response.text() //1빠 지금 json 파일로 데리고 온 게 아님 단순 text로 데리고 온 거임
+            })
+            .then(function(result) { // 2빠
+                console.log(result)
+                window.location.href = "index.html" //window객체라서 window는 생략가능함
+            })
+    })
+    document.querySelector('#x-cancle-btn').onclick = function() {
+        window.location.href = 'index.html' //<!--이 링크로 이동해주세요-->
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>계산기</title>
+</head>
+<body>
+
+<h1>웹 계산기</h1>
+
+<form>
+제목*: <input id="x-a" type="text">
+<select id ="x-op">
+<option vlaue="">연산자 선택</option> <!--value안주면  -->
+<option>+<option>
+<option>-<option>
+<option>*<option>
+<option>/<option>
+</select>
+<input id ="x-a" type="text"></input>
+<input id ="x-b" type="text"></input>
+<input id = "x-op"></input>
+<button id="x-do-btn" type="button">=</button>
+
+</form>
+
+<script type="text/javascript">
+  var xA = document.querySelector("#x-a");
+  var xB = document.querySelector("#x-b");
+  var xOp = document.querySelector("#x-op");
+  var xResult = document.querySelector("#x-result");
+  
+
+  document.querySelector("#x-do-btn").onclick = function() {
+    if (xA.value == "" || xB.value == "") {
+      window.alert("값을 입력하세요");
+      return;
+    }
+    if (xOp.value ==""){
+    	window.alret("연산자를 선택하세요");
+    	return;
+    }
+
+    fetch(`/calc?op=${encodeURIComponent(xOp.value)}&a=${xA.value}&b=${xB.value}`) //기존의URL과충돌이 나는 문자열은 인코딩해줌
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        xResult.value = text;
+      });
+  };
+
+</script>
+
+</body>
+</html>

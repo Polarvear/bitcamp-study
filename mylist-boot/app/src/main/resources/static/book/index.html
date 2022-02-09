@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #x-board-table {
+        border-collapse: collapse;
+    }
+    #data-tr {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        background-color: #e6f1ff;
+    }
+</style>
+<body>
+<a href="form.html">새로운 책 리뷰 등록 </a>
+<table id="x-board-table">
+    <thead>
+    <tr id="data-tr">
+        <th>제목&nbsp;&nbsp;</th>
+        <th>저자&nbsp;&nbsp;</th>
+        <th>출판사&nbsp;&nbsp;</th>
+        <th>총 페이지 수&nbsp;&nbsp;</th>
+        <th>가격&nbsp;&nbsp;</th>
+        <th>읽은 날짜&nbsp;&nbsp;</th>
+        <th>느낀점</th>
+    </tr>
+    </thead>
+    <tr id="data-target-tr">
+
+    </tr>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    const tbody = document.querySelector('#x-board-table')
+    fetch("/book/list")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(books) {
+            console.log(books)
+            const trEle = document.querySelector('#data-target-tr')
+            for (let i = 0; i < books.length; i++) {
+                const book = books[i]
+                trEle.innerHTML = `<th>${book.title}</th>
+                                   <th>${book.author}</th>
+                                   <th>${book.press}</th>
+                                   <th>${book.pages}</th>
+                                   <th>${book.price}원</th>
+                                   <th>&nbsp;${book.readDate}&nbsp;</th>
+                                   <th>${book.feed}</th>`
+
+                tbody.appendChild(trEle)
+
+            }
+        })
+
+
+
+</script>
+</body>
+</html>

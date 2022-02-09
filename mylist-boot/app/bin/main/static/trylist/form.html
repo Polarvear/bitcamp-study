@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>현상범 추가 등록입니다.</title>
+
+</head>
+<h1>현상범 추가페이지입니다.</h1>
+<body>
+*이름 : <input type="text" id="x-name">
+성별 : <input type="text" id="x-gender">
+나이 : <input type="text" id="x-age">
+*현상금 : <input type="text" id="x-bounty">
+(*)항목은 필수 입력항목입니다.
+<button type="button" id="add-btn">등록</button>
+<button type="button" id="cancle-btn"><a href="index.html"> 취소</a></button>
+
+
+
+
+<script>
+
+    const addBtn = document.querySelector('#add-btn')
+
+    const xName = document.querySelector('#x-name')
+    const xGender = document.querySelector('#x-gender')
+    const xAge = document.querySelector('#x-age')
+    const xBounty = document.querySelector('#x-bounty')
+
+
+
+
+
+    const arr = location.href.split("?");
+    console.log(arr);
+
+    if (arr.length == 1) {
+        alert("요청 형식이 옳바르지 않습니다.")
+        throw "URL 형식 오류!";
+    }
+
+    const qs = arr[1];
+    console.log(qs);
+
+    // 2) 쿼리 스트링에서 email 값을 추출한다.
+    const params = new URLSearchParams(qs);
+    const name = params.get("name");
+
+    fetch(`/trylist/get?name=${name}`)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(info) {
+            values = info.split(",");
+
+
+            xName.value = values[0];
+            xAge.value = values[1];
+            xGender.value = values[2];
+            xBounty.value = values[3];
+
+            addBtn.addEventListener('click', (e) => {
+
+
+                if (xName.value == '' || xBounty.value == '') {
+                    alert('필수입력 항목입니다.')
+                    return
+                }
+
+                fetch(`/trylist/add?name=${xName.value}&gender=${xGender.value}&age=${xAge.value}&bounty=${xBounty.value}`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data)
+                        location.href = 'index.html'
+                    })
+
+            })
+        }
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
