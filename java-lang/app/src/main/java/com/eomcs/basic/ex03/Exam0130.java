@@ -58,7 +58,7 @@ public class Exam0130 {
     list.add(m2);
     list.add(m3);
     System.out.println(list);
-
+    -
     // contains()
     // - 해당 인스턴스와 같은 객체가 있는지 알아낸다.
     // - 단 인스턴스 주소를 비교하는 것이 아니라

@@ -4,8 +4,8 @@ import com.eomcs.app2.handler.ScoreHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  ScoreHandler scoreHandler = new ScoreHandler();
 
+  ScoreHandler scoreHandler = new ScoreHandler();
 
   public static void main(String[] args) {
     new App().service();
@@ -13,32 +13,32 @@ public class App {
 
   public void service() {
 
-
     while (true) {
       printMenu();
       String input = Prompt.promptString("명령> ");
 
       if (checkQuit(input)) {
         break;
-      } 
+      }
+
       try {
         switch (input) {
           case "1": scoreHandler.create(); break;
-          case "2": scoreHandler.list();  break;
-          case "3": scoreHandler.detail();  break;
-          case "4": scoreHandler.update();  break;
-          case "5": scoreHandler.delete();  break;
+          case "2": scoreHandler.list(); break;
+          case "3": scoreHandler.detail(); break;
+          case "4": scoreHandler.update(); break;
+          case "5": scoreHandler.delete(); break;
           default:
             System.out.println("올바른 메뉴 번호를 입력하세요!");
         }
       } catch (Exception e) {
-        System.out.println("실행중 오류 발생: " +e.getMessage());
+        System.out.println("실행 중 오류 발생: " + e.getMessage());
       }
+
       System.out.println();
     }
 
     System.out.println("종료!");
-
   }
 
   private void printMenu() {
@@ -50,12 +50,16 @@ public class App {
     System.out.println("5. 삭제");
   }
 
-
   private boolean checkQuit(String input) {
-    return input.equals("quit") || input.equals("exit"); 
-  } 
-
+    return input.equals("quit") || input.equals("exit");
+  }
 }
+
+
+
+
+
+
 
 
 

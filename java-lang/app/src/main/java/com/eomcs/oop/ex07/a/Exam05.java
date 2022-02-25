@@ -17,7 +17,7 @@ abstract class Letter1 {
     this.printHeader();
     System.out.println(this.content);
     System.out.println();
-    System.out.printf("              From %s!\n", this.getSign());
+    System.out.printf("              from %s!\n", this.getSign());
     System.out.println();
     this.printFooter();
   }
@@ -39,7 +39,7 @@ class Bill extends Letter1 {
 
   @Override
   public String getSign() {
-    return "홍길동";
+    return "한국전력공사";
   }
 
   @Override
@@ -52,7 +52,7 @@ class Bill extends Letter1 {
 public class Exam05 {
   public static void main(String[] args) {
     Letter1 letter = new Bill();
-    letter.setContent("눈요?");
+    letter.setContent("이번달 전기요금은 54,500원 입니다.");
     letter.print();
   }
 }

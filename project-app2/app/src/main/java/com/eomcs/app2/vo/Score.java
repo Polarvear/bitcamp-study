@@ -19,7 +19,7 @@ public class Score {
   }
 
   public String toCSV() {
-    return String.format("%s,%d,%d,%d",
+    return String.format("%s,%d,%d,%d", 
         this.getName(),
         this.getKor(),
         this.getEng(),
@@ -27,7 +27,7 @@ public class Score {
   }
 
   private void compute() {
-    this.sum = this.kor + this.eng + this.math;
+    sum = kor + eng + math;
     average = sum / 3f;
   }
 
@@ -70,5 +70,6 @@ public class Score {
     return "Score [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
         + sum + ", average=" + average + "]";
   }
+
 
 }
