@@ -28,12 +28,12 @@ public class Exam0130 {
     }
 
     try (Connection con = DriverManager.getConnection( //
-        "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery( //
             "select * from x_board where board_id = " + no)) {
 
-      if (rs.next()) {
+      if (rs.next()) { //일치하거나 일치하지 않거나 둘중 하나기 때문에 한번만 실행함
         // 레코드에서 컬럼 값을 꺼낼 때 컬럼 번호를 지정하는 것 보다
         // 컬럼의 이름을 지정하는 것이 유지보수에 더 좋다.
         //

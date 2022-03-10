@@ -1,6 +1,5 @@
 package com.eomcs.mylist.controller;
 
-import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,49 +9,42 @@ import com.eomcs.mylist.domain.Board;
 @RestController 
 public class BoardController {
 
-
+  // @Autowired
+  // - 필드 선언부에 이 애노테이션을 붙여서 표시해 두면, 
+  //   Spring Boot가 BoardController 객체를 만들 때 BoardDao 구현체를 찾아 자동으로 주입한다. 
+  //
   @Autowired
-  BoardDao boardDao;  //  = new JsonBoardDao(); // 다형적 변수 클래스 이름도 통상적으로 인터페이스의 이름을 뒤에 준다. 또는 클래스명+impl를 붙임
+  BoardDao boardDao;
 
   @RequestMapping("/board/list")
-  public Object list() {
+  public Object list() throws Exception {
     return boardDao.findAll(); 
   }
 
   @RequestMapping("/board/add")
   public Object add(Board board) throws Exception {
-    board.setCreatedDate(new Date(System.currentTimeMillis()));
-    boardDao.insert(board);
-    return boardDao.countAll();
+    return boardDao.insert(board);
   }
 
 
   @RequestMapping("/board/get")
-  public Object get(int index) throws Exception {
-    Board board = boardDao.findByNo(index);
+  public Object get(int no) throws Exception {
+    Board board = boardDao.findByNo(no);
     if (board == null) {
       return "";
     }
-    boardDao.increaseViewCount(index);
+    boardDao.increaseViewCount(no);
     return board;
   }
 
   @RequestMapping("/board/update")
-  public Object update(int index, Board board) throws Exception {
-    Board old = boardDao.findByNo(index);
-    if (old == null) {
-      return 0;
-    }
-
-    board.setViewCount(old.getViewCount());
-    board.setCreatedDate(old.getCreatedDate());
-
-    return boardDao.update(index, board);
+  public Object update(Board board) throws Exception {
+    return boardDao.update(board);
   }
 
   @RequestMapping("/board/delete")
-  public Object delete(int index) throws Exception {
-    return boardDao.delete(index);
+  public Object delete(int no) throws Exception {
+    return boardDao.delete(no);
   }
 }
 
